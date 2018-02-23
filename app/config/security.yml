@@ -26,3 +26,4 @@ security:
 
     access_control:
         - { path: ^/category, roles: "ROLE_USER" }
+        - { path: ^/account, roles: "ROLE_USER" }

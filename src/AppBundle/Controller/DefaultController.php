@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,20 @@ class DefaultController extends Controller
     }
 
 
+
+
+
+    /**
+     * @Route("/account", name="user_info")
+     */
+    public function listAction(UserManager $userManager)
+    {
+        $user = $userManager->getUsername();
+
+        return $this->render('default/account.html.twig', [
+            'user' => $user
+        ]);
+    }
 
 
 

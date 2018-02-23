@@ -33,4 +33,10 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
     }
+
+    public function getUsername()
+    {
+        return $this->em->getRepository( User:: class)
+            ->findAll();
+    }
 }
