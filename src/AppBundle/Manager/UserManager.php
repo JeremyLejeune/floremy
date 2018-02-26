@@ -25,6 +25,25 @@ class UserManager {
         $this->em->persist($user);
         $this->em->flush();
     }
+
+
+    public function createadminUser($firstname, $lastname, $email, $password, $memberid)
+    {
+
+        $user = new User();
+        $pass = $this->passwordEncoder->encodePassword($user, $password);
+        $user
+            ->setFirstname($firstname)
+            ->setLastname( $lastname)
+            ->setEmail($email)
+            ->setPassword($pass)
+            ->setCreatAt( $user->getCreatAt())
+            ->setMemberId( $memberid);
+        $this->em->persist($user);
+        $this->em->flush();
+    }
+
+
     public function deleteUser($id){
         $user = $this->getUser($id);
         $this->em->remove($user);

@@ -32,7 +32,7 @@ class DefaultController extends Controller
      */
     public function listAction(UserManager $userManager)
     {
-        $user = $userManager->getUsername();
+        $user = $userManager->getUsers();
 
         return $this->render('default/account.html.twig', [
             'user' => $user
