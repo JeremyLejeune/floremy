@@ -2,9 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -36,6 +39,29 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/post", name="post")
+     */
+    public function indexRegistration(Request $request)
+    {
+        $user = new User();
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $task = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            return $this->redirectToRoute('category');
+        }
+        return $this->render('user/user-add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 
 }

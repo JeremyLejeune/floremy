@@ -62,7 +62,14 @@ class User implements UserInterface
      *
      * @ORM\Column(name="member_id", type="integer")
      */
-    private $memberId;
+    private $memberId = 3;
+
+
+    public function __construct()
+    {
+        $this->creatAt = new \DateTime();
+        $this->memberId = 3;
+    }
 
 
     /**
@@ -178,13 +185,11 @@ class User implements UserInterface
      *
      * @return User
      */
-    public function setCreatAt($creatAt)
+    public function setCreatAt()
     {
-        $this->creatAt = $creatAt;
-
+        $this->creatAt = new \DateTime("now");
         return $this;
     }
-
     /**
      * Get creatAt
      *
@@ -247,4 +252,6 @@ class User implements UserInterface
     }
 
 }
+
+
 
