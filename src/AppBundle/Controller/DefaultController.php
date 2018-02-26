@@ -28,7 +28,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/account", name="user_info")
+     * @Route("/account_all", name="user_info")
      */
     public function listAction(UserManager $userManager)
     {
@@ -39,29 +39,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/post", name="post")
-     */
-    public function indexRegistration(Request $request)
-    {
-        $user = new User();
-
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $task = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($task);
-            $em->flush();
-
-            return $this->redirectToRoute('category');
-        }
-        return $this->render('user/user-add.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
 
 
 }

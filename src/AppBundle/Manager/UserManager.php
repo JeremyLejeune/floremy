@@ -1,42 +1,45 @@
 <?php
-
-// src/AppBundle/Manager/UserManager.php
 namespace AppBundle\Manager;
 use AppBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Tests\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-
-class UserManager
-{
-    private $passwordEncoder;
+use Doctrine\ORM\EntityManagerInterface;
+class UserManager {
+    /** @var EntityManagerInterface */
     private $em;
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager )
+    private $passwordEncoder;
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
-        $this->passwordEncoder = $passwordEncoder ;
         $this->em = $entityManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
-
-    public function createUser( $firstname, $lastname, $email, $password, $creatat, $memberid)
+    public function createUser(User $user)
     {
-        $user = new User();
-        $password = $this->passwordEncoder->encodePassword( $user, $password);
+        $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
         $user
-        ->setFirstname( $firstname)
-        ->setLastname( $lastname)
-        ->setEmail( $email)
-        ->setPassword( $password)
-        ->setCreatAt( $creatat)
-        ->setMemberId( $memberid);
-
+            ->setFirstname($user->getFirstname())
+            ->setLastname( $user->getLastname())
+            ->setEmail( $user->getEmail())
+            ->setPassword( $password)
+            ->setCreatAt( $user->getCreatAt())
+            ->setMemberId( $user->getMemberId());
         $this->em->persist($user);
         $this->em->flush();
     }
-
-    public function getUsername()
+    public function deleteUser($id){
+        $user = $this->getUser($id);
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+    public function getUsers()
     {
-        return $this->em->getRepository( User:: class)
+        return $this->em->getRepository(User:: class)
             ->findAll();
     }
+    public function getUser($id)
+    {
+        return $this->em->getRepository(User:: class)
+            ->find($id);
+    }
 }
+
+?>
