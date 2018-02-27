@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Films
  *
@@ -44,7 +45,7 @@ class Films
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
     /**
@@ -53,16 +54,18 @@ class Films
      * @ORM\Column(name="duration", type="integer")
      */
     private $duration;
+
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * Set title
      *
      * @param string $title
      *
-     * @return Film
+     * @return Films
      */
     public function setTitle($title)
     {
@@ -83,7 +86,7 @@ class Films
      *
      * @param string $author
      *
-     * @return Film
+     * @return Films
      */
     public function setAuthor($author)
     {
@@ -104,7 +107,7 @@ class Films
      *
      * @param string $category
      *
-     * @return Film
+     * @return Films
      */
     public function setCategory($category)
     {
@@ -125,7 +128,7 @@ class Films
      *
      * @param string $description
      *
-     * @return Film
+     * @return Films
      */
     public function setDescription($description)
     {
@@ -146,7 +149,7 @@ class Films
      *
      * @param \DateTime $date
      *
-     * @return Film
+     * @return Films
      */
     public function setDate($date)
     {
@@ -162,10 +165,11 @@ class Films
     {
         return $this->date;
     }
+
     /**
      * Set duration
      *
-     * @return Film
+     * @return Films
      */
     public function setDuration($duration)
     {
@@ -177,8 +181,29 @@ class Films
      *
      * @return string
      */
-    public function getDuration($duration)
+    public function getDuration()
     {
-        return $duration->$duration;
+        return $this->duration;
+    }
+
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product brochure as a image file.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $brochure;
+
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
+
+    public function setBrochure($brochure)
+    {
+        $this->brochure = $brochure;
+
+        return $this;
     }
 }
