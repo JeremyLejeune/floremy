@@ -22,7 +22,7 @@ class FilmController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $films = $em->getRepository(Films::class)->findAll();
-        return $this->render('user/films.html.twig',[
+        return $this->render('media/films.html.twig',[
             'films' => $films
         ]);
     }
@@ -70,7 +70,7 @@ class FilmController extends Controller
             return $this->redirect($this->generateUrl('films'));
         }
 
-        return $this->render('user/film-add.html.twig', array(
+        return $this->render('media/film-add.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -97,7 +97,7 @@ class FilmController extends Controller
         $film = $filmManager->getFilm($id);
 
         if(!empty($film)){
-            return $this->render('user/film-view.html.twig', [
+            return $this->render('media/film-view.html.twig', [
                 'film' => $film
             ]);
         }

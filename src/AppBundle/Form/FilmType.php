@@ -22,8 +22,8 @@ class FilmType extends AbstractType
             ->add('description', TextType::class)
             ->add('duration', NumberType::class)
             ->add('date', DateTimeType::class)
-            ->add('brochure', FileType::class, array('label' => 'Brochure Film'))
-            ->add('video', FileType::class, array('label' => 'Video Film'))
+            ->add('brochure', FileType::class, array('label' => 'Brochure Media'))
+            ->add('video', FileType::class, array('label' => 'Video Media'))
             ->add('save', SubmitType::class);
     }
 

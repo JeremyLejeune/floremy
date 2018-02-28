@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function categoryAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('security/admin.html.twig', [
+        return $this->render('admin/admin.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
@@ -29,7 +29,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $films = $em->getRepository(Films::class)->findAll();
-        return $this->render('security/films.html.twig',[
+        return $this->render('admin/films_admin.html.twig',[
             'films' => $films
         ]);
     }

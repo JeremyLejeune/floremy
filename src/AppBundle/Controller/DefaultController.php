@@ -23,43 +23,15 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/test_includ", name="homepage")
-     */
-    public function includAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('include/test.html.twig', [
 
+
+    public function menuAction()
+    {
+        $tab = array("Documentaire", "Serie", "films");
+        return $this->render('templates/menu.html.twig', [
+            'tab' => $tab
         ]);
     }
-
-    /**
-     * @Route("/test_include", name="homepage")
-     */
-    public function includeAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('include/test2.html.twig', [
-
-        ]);
-    }
-
-
-
-    /**
-     * @Route("/test_include2", name="homepage")
-     */
-    public function include2Action(Request $request)
-    {
-        // replace this example code with whatever you need
-        $tabs = ['Menu 1', 'Menu 2', 'Menu 3'];
-        return $this->render('include/menu.html.twig',[
-            'tabs' => $tabs
-        ]);
-    }
-
-
 
 
 
@@ -70,7 +42,7 @@ class DefaultController extends Controller
     {
         $user = $userManager->getUsers();
 
-        return $this->render('default/account.html.twig', [
+        return $this->render('user/account.html.twig', [
             'user' => $user
         ]);
     }
