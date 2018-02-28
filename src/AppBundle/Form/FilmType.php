@@ -1,7 +1,9 @@
 <?php
 namespace AppBundle\Form;
 use AppBundle\Entity\Films;
+use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,8 +21,9 @@ class FilmType extends AbstractType
             ->add('category', TextType::class)
             ->add('description', TextType::class)
             ->add('duration', NumberType::class)
-            ->add('date', NumberType::class)
+            ->add('date', DateTimeType::class)
             ->add('brochure', FileType::class, array('label' => 'Brochure Film'))
+            ->add('video', FileType::class, array('label' => 'Video Film'))
             ->add('save', SubmitType::class);
     }
 

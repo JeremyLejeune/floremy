@@ -5,7 +5,11 @@
 </head>
 <body>
     {% for film in films %}
-    <p>{{ film.title }}</p>
+        <p>{{ film.title }}</p>
+        <a href="{{ asset('uploads/brochures/' ~ film.brochure) }}">View brochure (PDF)</a>
+        <br><br><br>
+        <img src="{{ asset('uploads/brochures/' ~ film.brochure) }}"></img>
+        <a href="{{ path('film-view', {'id': film.id}) }}">view article</a>
     {% endfor %}
 </body>
 </html>

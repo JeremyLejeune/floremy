@@ -15,13 +15,13 @@ class FilmFixtures extends Fixture
     {
         $film = new Films();
         $film
-            ->setAuthor('test')
+            ->setAuthor('jack')
             ->setCategory(0)
             ->setDate(new \DateTime())
-            ->setDescription('test')
+            ->setDescription('c est un film')
             ->setDuration(200)
-            ->setTitle('test')
-            ->setBrochure('web/Ressources/img/icone.jpg');
+            ->setTitle('le test 1')
+            ->setBrochure('../../abcd.jpeg');
         $manager->persist($film);
         $manager->flush();
     }

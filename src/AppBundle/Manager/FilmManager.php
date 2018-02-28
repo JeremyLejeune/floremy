@@ -12,7 +12,7 @@ class FilmManager {
         $this->em = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
     }
-    public function createUser(Films $film)
+    public function addFilm(Films $film)
     {
         $film
             ->setTitle($film->getTitle())
@@ -21,12 +21,13 @@ class FilmManager {
             ->setCategory( $film->getCategory())
             ->setDescription( $film->getDescription())
             ->setBrochure( $film->getBrochure())
+            ->setVideo( $film->getVideo())
             ->setDuration( $film->getDuration());
         $this->em->persist($film);
         $this->em->flush();
     }
     public function deleteFilm($id){
-        $film = $this->getUser($id);
+        $film = $this->getFilm($id);
         $this->em->remove($film);
         $this->em->flush();
     }

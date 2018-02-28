@@ -45,7 +45,7 @@ class Films
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
     /**
@@ -191,7 +191,7 @@ class Films
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank(message="Please, upload the product brochure as a image file.")
-     * @Assert\File(mimeTypes={ "image/jpeg" })
+     * @Assert\File(mimeTypes={ "image/jpeg", "video/mp4"})
      */
     private $brochure;
 
@@ -203,6 +203,27 @@ class Films
     public function setBrochure($brochure)
     {
         $this->brochure = $brochure;
+
+        return $this;
+    }
+
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product brochure as a video file.")
+     * @Assert\File(mimeTypes={ "video/mp4", "video/quicktime"})
+     */
+    private $video;
+
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    public function setVideo($video)
+    {
+        $this->video = $video;
 
         return $this;
     }
