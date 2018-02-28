@@ -70,7 +70,7 @@ class FilmController extends Controller
             return $this->redirect($this->generateUrl('films'));
         }
 
-        return $this->render('media/film-add.html.twig', array(
+        return $this->render('media/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }

@@ -33,20 +33,4 @@ class DefaultController extends Controller
         ]);
     }
 
-
-
-    /**
-     * @Route("/account_all", name="user_info")
-     */
-    public function listAction(UserManager $userManager)
-    {
-        $user = $userManager->getUsers();
-
-        return $this->render('user/account.html.twig', [
-            'user' => $user
-        ]);
-    }
-
-
-
 }

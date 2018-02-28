@@ -13,7 +13,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/post", name="post")
+     * @Route("/register", name="register")
      */
     public function indexRegistration(Request $request, UserManager $userManager)
     {
@@ -24,7 +24,7 @@ class UserController extends Controller
         {
             $user = $form->getData();
             $userManager->createUser($user);
-            return $this->redirectToRoute('category');
+            return $this->redirectToRoute('login');
         }
         return $this->render('user/user-add.html.twig', [
             'form' => $form->createView()
@@ -57,8 +57,21 @@ class UserController extends Controller
 
 
 
+    /**
+     * @Route("/user/{id}", name="user-view", requirements={"id"="\d+"})
+     */
+    public function viewAction(UserManager $userManager, $id)
+    {
+        $user = $userManager->getUser($id);
 
-
-
+        if(!empty($user)){
+            return $this->render('user/account.html.twig', [
+                'user' => $user
+            ]);
+        }
+        else{
+            throw new BadRequestHttpException( '404, Project not found.');
+        }
+    }
 
 }

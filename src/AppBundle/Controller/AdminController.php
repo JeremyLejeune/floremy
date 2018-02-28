@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Films;
+use AppBundle\Entity\User;
+use AppBundle\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +34,35 @@ class AdminController extends Controller
         return $this->render('admin/films_admin.html.twig',[
             'films' => $films
         ]);
+    }
+
+
+
+    /**
+     * @Route("/admin_users", name="admin_users")
+     */
+    public function listAction(UserManager $userManager)
+    {
+        $user = $userManager->getUsers();
+
+        return $this->render('admin/profiles.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/user/delete/{id}", name="user-delete", requirements={"id"="\d+"})
+     */
+    public function deleteAction(UserManager $userManager, $id)
+    {
+        $userManager->deleteUser($id);
+
+
+        return $this->redirectToRoute('admin_users');
+
+
     }
 
 
