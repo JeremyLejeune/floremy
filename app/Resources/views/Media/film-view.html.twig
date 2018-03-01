@@ -1,22 +1,25 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ film.title }}</title>
-</head>
-<body>
-<h1>{{ film.title }}</h1>
-<p>{{ film.description }}</p>
-
-<p>{{ film.title }}</p>&
-<a href="{{ asset('uploads/brochures/' ~ film.brochure) }}">View brochure (PDF)</a>
-<br><br><br>
-<img src="{{ asset('uploads/brochures/' ~ film.brochure) }}"></img>
-<video width="640" height="480"  controls src="{{ asset('uploads/brochures/' ~ film.video) }}"></video>
-
-<a href="{{ path('films') }}">Retour</a>
-</body>
-</html>
+{% extends "templates/fiche_layout.html.twig" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row fiche">
+        <div class="col-sm-6 infos">
+            <h1>{{ film.title }}</h1>
+            <div>
+                <ul>
+                   <li>{{ film.category }} -</li>
+                   <li>{{ film.author }} -</li>
+                   <li>{{ film.date|date('d-m-Y') }}</li>
+                </ul>
+            </div>
+            <div>
+                <p>{{ film.description }}</p>
+            </div>
+            <a class="download" href="{{ asset('uploads/brochures/' ~ film.brochure) }}">Voir l'affiche</a>
+            <a class="back" href="{{ path('films') }}">Retour</a>
+        </div>
+        <div class="col-sm-6 video">
+            <video controls src="{{ asset('uploads/brochures/' ~ film.video) }}"></video>
+        </div>
+    </div>
+</div>
+{% endblock %}

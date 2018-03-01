@@ -107,41 +107,5 @@ class FilmController extends Controller
     }
 
 
-    /**
-     * @Route("/film/delete/{id}", name="film-delete", requirements={"id"="\d+"})
-     */
-    public function deleteAction(FilmManager $filmManager, $id)
-    {
-        $filmManager->deleteFilm($id);
 
-
-            return $this->redirectToRoute('films');
-
-
-    }
-
-    /*
-        /**
-         * @Route("/film/edit/{id}", name="film_edit")
-         */
-  /*  public function editAction(FilmManager $filmManager, Request $request,  $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $film = $em->getRepository(Films:: class)
-            ->find($id);
-        $film->setBrochure(new File($this->getParameter('brochures_directory').'/'.$film->getBrochure()));
-        $form = $this->createForm(FilmType:: class, $film);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $newfilm = $form->getData();
-            $filmManager->createForm($newfilm);
-            return $this->redirectToRoute('films');
-        }
-        return $this->render('user/film-edit.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-  */
 }

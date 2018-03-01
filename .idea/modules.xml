@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file:///private/var/folders/xj/5_r8nmx16h96ht63xdt0z9sh0000gn/T/film-view.html.twig/.idea/film-view.html.twig.iml" filepath="/private/var/folders/xj/5_r8nmx16h96ht63xdt0z9sh0000gn/T/film-view.html.twig/.idea/film-view.html.twig.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/floremy.iml" filepath="$PROJECT_DIR$/.idea/floremy.iml" />
       <module fileurl="file://$PROJECT_DIR$/../cours_sf_tp3/.idea/project_name.iml" filepath="$PROJECT_DIR$/../cours_sf_tp3/.idea/project_name.iml" />
     </modules>

@@ -15,6 +15,7 @@
     <p>Nom : {{ user.lastname }}</p>
     <p>adresse email : {{ user.email }}</p>
     <p>member_id : {{ user.memberid }}</p>
+    <a href="{{ path('user_edit', {'id': user.id}) }}">modifier l'utilisateur</a>
     <a href="{{ path('user-delete', {'id': user.id}) }}">supprimer l'utilisateur</a>
     <a href="{{ path('user-view', {'id': user.id}) }}">view user</a>
 <br><br>
