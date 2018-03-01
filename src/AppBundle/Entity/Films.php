@@ -31,9 +31,7 @@ class Films
      */
     private $author;
     /**
-     * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="category")
      */
     private $category;
     /**
@@ -105,11 +103,11 @@ class Films
     /**
      * Set category
      *
-     * @param string $category
+     * @param \AppBundle\Entity\Category $category
      *
      * @return Films
      */
-    public function setCategory($category)
+    public function setCategory(\AppBundle\Entity\Category $category)
     {
         $this->category = $category;
         return $this;
@@ -117,7 +115,7 @@ class Films
     /**
      * Get category
      *
-     * @return string
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {

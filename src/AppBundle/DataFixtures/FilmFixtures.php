@@ -8,15 +8,16 @@
 namespace AppBundle\DataFixtures;
 use AppBundle\Entity\Films;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-class FilmFixtures extends Fixture
+class FilmFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
         $film = new Films();
         $film
             ->setAuthor('jack')
-            ->setCategory(0)
+            ->setCategory($this->getReference('category'))
             ->setDate(new \DateTime())
             ->setDescription('c est un film')
             ->setDuration(200)
@@ -26,4 +27,11 @@ class FilmFixtures extends Fixture
         $manager->persist($film);
         $manager->flush();
     }
+
+    public function getDependencies()
+    {
+        return array(CategoryFixtures::class);
+    }
+
+
 }

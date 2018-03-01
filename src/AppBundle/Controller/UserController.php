@@ -74,4 +74,22 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * @Route("/profile/{id}", name="profile-view", requirements={"id"="\d+"})
+     */
+    public function profileAction(UserManager $userManager, $id)
+    {
+        $user = $userManager->getUser($id);
+
+        if(!empty($user)){
+            return $this->render('user/account2.html.twig', [
+                'user' => $user
+            ]);
+        }
+        else{
+            throw new BadRequestHttpException( '404, Project not found.');
+        }
+    }
+
 }

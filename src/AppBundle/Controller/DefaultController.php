@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Films;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
@@ -27,10 +28,27 @@ class DefaultController extends Controller
 
     public function menuAction()
     {
-        $tab = array("Documentaire", "Serie", "films");
+        $tab = array("documentaires", "series", "films", "profile");
         return $this->render('templates/menu.html.twig', [
             'tab' => $tab
         ]);
     }
+
+
+
+
+    /**
+     * @Route("/account_all", name="user_info")
+     */
+    public function listAction(UserManager $userManager)
+    {
+        $user = $userManager->getUsers();
+
+        return $this->render('user/account.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+
 
 }
