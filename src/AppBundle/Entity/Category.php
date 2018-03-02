@@ -15,20 +15,16 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Films", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Series", mappedBy="category")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="genre", type="string", length=255)
      */
     private $genre;
-    /**
-    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Films", mappedBy="category")
-    */
-    private $film;
-
     /**
      * Get id
      *
@@ -38,7 +34,6 @@ class Category
     {
         return $this->id;
     }
-
     /**
      * Set genre
      *
@@ -49,10 +44,8 @@ class Category
     public function setGenre($genre)
     {
         $this->genre = $genre;
-
         return $this;
     }
-
     /**
      * Get genre
      *
@@ -62,37 +55,4 @@ class Category
     {
         return $this->genre;
     }
-
-
-    /**
-     * Add movie
-     *
-     * @param \AppBundle\Entity\Films $film
-     *
-     * @return Category
-     */
-    public function addFilm(\AppBundle\Entity\Films $films)
-    {
-        $this->$films[] = $films;
-        return $this;
-    }
-    /**
-     * Remove movie
-     *
-     * @param \AppBundle\Entity\Films $films
-     */
-    public function deleteFilm(\AppBundle\Entity\Films $films)
-    {
-        $this->film->removeElement($films);
-    }
-    /**
-     * Get movie
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMovie()
-    {
-        return $this->film;
-    }
 }
-

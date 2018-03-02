@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Controller;
+
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -7,7 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Manager\UserManager;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 class UserController extends Controller
 {
 
@@ -58,14 +61,14 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/user/{id}", name="user-view", requirements={"id"="\d+"})
+     * @Route("/admin/user/{id}", name="user-view", requirements={"id"="\d+"})
      */
     public function viewAction(UserManager $userManager, $id)
     {
         $user = $userManager->getUser($id);
 
         if(!empty($user)){
-            return $this->render('user/account.html.twig', [
+            return $this->render('admin/account_all.html.twig', [
                 'user' => $user
             ]);
         }
@@ -76,20 +79,45 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/profile/{id}", name="profile-view", requirements={"id"="\d+"})
+     * @Route("/user/edit", name="user_edit")
      */
-    public function profileAction(UserManager $userManager, $id)
+    public function edituserAction(UserManager $userManager, Request $request)
     {
-        $user = $userManager->getUser($id);
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
 
-        if(!empty($user)){
-            return $this->render('user/account2.html.twig', [
-                'user' => $user
-            ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $user = $form->getData();
+            $userManager->createUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('profil');
         }
-        else{
-            throw new BadRequestHttpException( '404, Project not found.');
+
+        return $this->render('user/edit_account.html.twig', [ 'form' => $form->createView()
+        ]);
+    }
+
+
+
+
+
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profileAction()
+    {
+        $user = $this->getUser();
+        if ($user == null) {
+            throw new NotFoundHttpException('404, Utilisateur non trouvé');
         }
+        return $this->render('user/account.html.twig', [
+            'user' => $user
+        ]);
     }
 
 }

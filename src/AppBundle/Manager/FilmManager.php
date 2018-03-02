@@ -41,5 +41,17 @@ class FilmManager {
         return $this->em->getRepository(Films:: class)
             ->find($id);
     }
+
+
+    public function search($name)
+    {
+        if ($name == '') {
+            return [];
+        }
+        /** @var FilmsRepository $filmsRepository */
+        $filmsRepository = $this->em->getRepository(Films::class);
+        $films = $filmsRepository->searchAction($name);
+        return $films;
+    }
 }
 ?>

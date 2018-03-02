@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container">
         <h2>
-            <span class="underline">Série</span>
+            <span class="underline">Séries</span>
             <select class="selectpicker" data-style="btn-danger">
                 <option>Catégorie</option>
             </select>
@@ -16,10 +16,10 @@
                 {% for serie in series %}
                     <li class="flex-item">
                         <div>
-                            <a href="#" >
+                            <a href="{{ path('serie-view', {'id': serie.id}) }}" >
                                 <div class="cover" style='background: url("{{ asset('uploads/brochures/' ~ serie.brochure) }}");background-size: cover;'> </div>
                             </a>
-                            <p><a href="#" >{{ serie.title }}</a></p>
+                            <p><a href="{{ path('serie-view', {'id': serie.id}) }}" >{{ serie.title }}</a></p>
                         </div>
                     </li>
                 {% endfor %}

@@ -31,9 +31,10 @@ class Series
      */
     private $author;
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="category")
      */
     private $category;
     /**
@@ -45,7 +46,7 @@ class Series
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
     /**
@@ -74,7 +75,7 @@ class Series
      *
      * @param string $title
      *
-     * @return Serie
+     * @return Series
      */
     public function setTitle($title)
     {
@@ -95,7 +96,7 @@ class Series
      *
      * @param string $author
      *
-     * @return Serie
+     * @return Series
      */
     public function setAuthor($author)
     {
@@ -116,7 +117,7 @@ class Series
      *
      * @param string $category
      *
-     * @return Serie
+     * @return Series
      */
     public function setCategory($category)
     {
@@ -137,7 +138,7 @@ class Series
      *
      * @param integer $numberEpisode
      *
-     * @return Serie
+     * @return Series
      */
     public function setNumberEpisode($numberEpisode)
     {
@@ -158,7 +159,7 @@ class Series
      *
      * @param string $description
      *
-     * @return Serie
+     * @return Series
      */
     public function setDescription($description)
     {
@@ -179,7 +180,7 @@ class Series
      *
      * @param \DateTime $date
      *
-     * @return Serie
+     * @return Series
      */
     public function setDate($date)
     {
@@ -199,7 +200,7 @@ class Series
      * Set duration
      *
      * @param $duration
-     * @return Serie
+     * @return Series
      */
     public function setDuration($duration)
     {
@@ -215,7 +216,6 @@ class Series
     {
         return $duration->$duration;
     }
-
     /**
      * @ORM\Column(type="string")
      *
@@ -223,20 +223,15 @@ class Series
      * @Assert\File(mimeTypes={ "image/jpeg", "video/mp4"})
      */
     private $brochure;
-
     public function getBrochure()
     {
         return $this->brochure;
     }
-
     public function setBrochure($brochure)
     {
         $this->brochure = $brochure;
-
         return $this;
     }
-
-
     /**
      * @ORM\Column(type="string")
      *
@@ -244,16 +239,13 @@ class Series
      * @Assert\File(mimeTypes={ "video/mp4", "video/quicktime"})
      */
     private $video;
-
     public function getVideo()
     {
         return $this->video;
     }
-
     public function setVideo($video)
     {
         $this->video = $video;
-
         return $this;
     }
 }
