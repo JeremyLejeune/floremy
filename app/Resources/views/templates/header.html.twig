@@ -4,21 +4,21 @@
             <li class="left"><img src="{{ asset('img/logo.png') }}"></li>
             {{ render(controller('AppBundle:Default:searchBar')) }}
 
-            {% if is_granted('ROLE_ADMIN') %}
-            <li class="right">
-                <form action="{{ path('admin') }}" method="post">
-                    <button class="btn" type="submit">Admin</button>
-                </form>
-            </li>
-
-            {% endif %}
 
             <li class="right">
                 <form action="{{ path('logout') }}" method="post">
-                    <button class="btn" type="submit">Déconnexion</button>
+                    <button class="btn-red" type="submit">Déconnexion</button>
                 </form>
             </li>
             {{ render(controller('AppBundle:Default:menu')) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="right">
+                    <form action="{{ path('admin') }}" method="post">
+                        <button class="btn-red" type="submit">Admin</button>
+                    </form>
+                </li>
+
+            {% endif %}
         </ul>
     </nav>
 </header>

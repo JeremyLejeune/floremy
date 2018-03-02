@@ -33,7 +33,7 @@ class DefaultController extends Controller
 
     public function menuAction()
     {
-        $tab = array("documentaires", "series", "films", "profil");
+        $tab = array("series", "films", "profil");
         return $this->render('templates/menu.html.twig', [
             'tab' => $tab
         ]);
